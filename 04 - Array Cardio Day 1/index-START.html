@@ -38,28 +38,92 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let filtered = inventors.filter(inventor => 
+    (inventor.year >= 1500 && inventor.year <= 1599));
+
+    console.table(filtered);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+    
+    console.log(fullNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let sortedBirthdate = inventors.sort((a,b) => b.year - a.year);
+
+    console.table(sortedBirthdate);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    let totalYears = inventors.reduce((sum, inventor) => 
+    sum + (inventor.passed - inventor.year), 0);
+
+    console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+    let sortedLived = inventors.sort((a,b) => (b.passed - b.year) - (a.passed - a.year));
+
+    console.table(sortedLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    let sortedLastName = people.sort((a,b) => {
+    let lastNameA = a.split(", ")[0];
+    let lastNameB = b.split(", ")[0];
+    return lastNameA.localeCompare(lastNameB);
+    });
 
+    console.log(sortedLastName);
+    
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let talliedInstances = data.reduce((obj, item) => {
+      if(!obj[item]){
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {});
+
+    console.log(talliedInstances);
+
+    /*RMB WHEN ACCESSING OBJ, EXAMPLE:
+    const person = {
+    name: "Alice",
+    age: 25,
+    hobbies: ["reading", "cycling"],
+    address: {
+    city: "Singapore",
+    zip: "123456"
+  }
+    ✅ You can access the age in two main ways:
+🔹 1. Dot notation (most common and clean):
+console.log(person.age); // 25
+
+🔹 2. Bracket notation (useful for dynamic keys):
+console.log(person["age"]); // 25
+
+Both give you the value 25.
+};
+
+so because each item in the question 7 is surrounded by ' ', when i type obj[item] is equivalent to obj['car']? rifght
+
+Yes — you're 100% correct! ✅
+
+const obj = {};
+const item = 'car';
+
+obj[item] = 1;         // same as obj['car'] = 1
+console.log(obj.car);  // 1
+console.log(obj['car']); // 1
+console.log(obj[item]);  // 1
+*/
 
   </script>
 </body>
